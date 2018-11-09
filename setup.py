@@ -2,7 +2,7 @@ import io
 import re
 from setuptools import setup
 
-with io.open("click/__init__.py", "rt", encoding="utf8") as f:
+with io.open("src/ssm_config/__init__.py", "rt", encoding="utf8") as f:
     version = re.search(r"__version__ = \'(.*?)\'", f.read()).group(1)
 
 setup(
