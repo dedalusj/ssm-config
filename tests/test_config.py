@@ -105,6 +105,20 @@ def test_load_file_with_invalid_ssm_value(mocker):
         """)
 
 
+def test_load_file_with_failing_ssm_request(mocker):
+    mocked_client = mocker.Mock()
+    mocked_client.get_parameter.side_effect = boto_exceptions.ClientError({'Error': {'Code': 'Unauthorised'}},
+                                                                          'get')
+    mocked_boto = mocker.patch('ssm_config.config.boto3')
+    mocked_boto.client.return_value = mocked_client
+
+    with pytest.raises(boto_exceptions.ClientError):
+        load("""
+        prod:
+          path: <%= SSM['/prod/unknown_param'] %>
+        """)
+
+
 def test_load_env(mocker):
     data = """
     default: &default

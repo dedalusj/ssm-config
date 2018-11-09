@@ -35,6 +35,7 @@ class ConfigLoader(yaml.SafeLoader):
         except ClientError as e:
             if e.response['Error']['Code'] == 'ParameterNotFound':
                 raise ValueError(f'Could not find SSM parameter {ssm_path}')
+            raise
 
 
 def load(stream: Union[str, TextIO]) -> Dict:

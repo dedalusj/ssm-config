@@ -1,0 +1,4 @@
+htmlcov/
+.tox
+src/ssm_config.egg-info/
+.coverage
