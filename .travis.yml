@@ -1,18 +1,8 @@
-#sudo: false
-#language: python
-#cache: pip
-#python:
-#  - "3.6"
-#install: pip install -r dev-requirements.txt
-#script: py.test --cov=config tests/
-
 os: linux
 sudo: false
 language: python
 python:
   - "3.6"
-  - "3.5"
-  - "3.4"
 env: TOXENV=py,codecov
 
 matrix:
@@ -27,10 +17,7 @@ script:
 cache:
   - pip
 
-branches:
-  only:
-    - master
-    - /^.*\.x$/
-
 notifications:
-  email: false
+  email:
+    on_success: change
+    on_failure: change
