@@ -15,6 +15,11 @@ setup(
                 "supporting overriding from environment variables and AWS SSM",
     packages=["ssm_config"],
     package_dir={'': 'src'},
+    install_requires=[
+       'pyyaml==3.13',
+       'boto3==1.9.39',
+       'botocore==1.12.39'
+    ],
     python_requires=">=3.4",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
