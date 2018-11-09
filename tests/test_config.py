@@ -3,7 +3,7 @@ import os
 from botocore import exceptions as boto_exceptions
 import pytest
 
-from config.config import load, load_env
+from ssm_config.config import load, load_env
 
 
 def test_load_simple_file():
@@ -67,7 +67,7 @@ def test_load_file_with_unknown_env_value():
 def test_load_file_with_ssm_values(mocker):
     mocked_client = mocker.Mock()
     mocked_client.get_parameter.return_value = {'Parameter': {'Value': 'me'}}
-    mocked_boto = mocker.patch('config.config.boto3')
+    mocked_boto = mocker.patch('ssm_config.config.boto3')
     mocked_boto.client.return_value = mocked_client
 
     assert load("""
@@ -95,7 +95,7 @@ def test_load_file_with_invalid_ssm_value(mocker):
     mocked_client = mocker.Mock()
     mocked_client.get_parameter.side_effect = boto_exceptions.ClientError({'Error': {'Code': 'ParameterNotFound'}},
                                                                           'get')
-    mocked_boto = mocker.patch('config.config.boto3')
+    mocked_boto = mocker.patch('ssm_config.config.boto3')
     mocked_boto.client.return_value = mocked_client
 
     with pytest.raises(ValueError):
