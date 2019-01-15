@@ -16,7 +16,7 @@ setup(
     packages=["ssm_config"],
     package_dir={'': 'src'},
     install_requires=[
-       'pyyaml==3.13',
+       'pyyaml>=4.2b1',
        'boto3==1.9.39',
        'botocore==1.12.39'
     ],
